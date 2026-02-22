@@ -1,0 +1,392 @@
+/* ===========================
+   ROOT VARIABLES & 90s THEME
+   =========================== */
+:root {
+  --primary: #ff00ff;
+  --secondary: #00ffff;
+  --accent: #ffff00;
+  --success: #00ff00;
+  --danger: #ff0080;
+  --bg-dark: #000000;
+  --bg-light: #111111;
+  --border: #00ffff;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  --border-width: 2px;
+  --border-radius: 4px;
+}
+
+/* ===========================
+   GLOBAL STYLES
+   =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Courier New', monospace;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===========================
+   CONTAINER & LAYOUT
+   =========================== */
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
+  box-shadow: inset 0 0 50px rgba(255, 0, 255, 0.1);
+}
+
+.game-header {
+  padding: var(--spacing-lg);
+  text-align: center;
+  border-bottom: var(--border-width) solid var(--border);
+  background-color: var(--bg-light);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.game-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--primary);
+  text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
+  margin-bottom: var(--spacing-md);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary); }
+  50% { text-shadow: 0 0 20px var(--primary), 0 0 40px var(--secondary), 0 0 60px var(--accent); }
+}
+
+.header-info {
+  display: flex;
+  gap: var(--spacing-xl);
+  justify-content: center;
+}
+
+.score-display, .level-display {
+  text-align: center;
+  min-width: 100px;
+}
+
+.score-display .label, .level-display .label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.score-display .value, .level-display .value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
+}
+
+/* ===========================
+   GAME CONTAINER
+   =========================== */
+.game-container {
+  display: flex;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  flex: 1;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#gameCanvas {
+  border: var(--border-width) solid var(--border);
+  background-color: var(--bg-dark);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 
+              inset 0 0 20px rgba(255, 0, 255, 0.1);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+#nextCanvas {
+  border: var(--border-width) solid var(--secondary);
+  background-color: var(--bg-dark);
+  margin-top: var(--spacing-md);
+}
+
+/* ===========================
+   SIDEBAR
+   =========================== */
+.game-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 200px;
+}
+
+.next-piece-box,
+.controls-box,
+.status-box,
+.stats-box {
+  background-color: var(--bg-light);
+  border: var(--border-width) solid var(--border);
+  padding: var(--spacing-md);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.next-piece-box .label,
+.controls-box .label,
+.status-box .label,
+.stats-box .label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--spacing-md);
+  font-weight: bold;
+}
+
+/* ===========================
+   CONTROLS LIST
+   =========================== */
+.controls-list {
+  list-style: none;
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.controls-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.controls-list kbd {
+  background-color: var(--primary);
+  color: var(--bg-dark);
+  padding: 2px 6px;
+  border-radius: var(--border-radius);
+  font-size: 0.75rem;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(255, 0, 255, 0.3);
+}
+
+/* ===========================
+   BUTTONS
+   =========================== */
+.status-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: var(--border-width) solid;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+.btn-secondary {
+  border-color: var(--secondary);
+  color: var(--secondary);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.btn-secondary:active {
+  transform: scale(0.95);
+}
+
+/* ===========================
+   STATS
+   =========================== */
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+  font-size: 0.875rem;
+}
+
+.stat:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 1.125rem;
+  text-shadow: 0 0 5px var(--accent);
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+.game-footer {
+  padding: var(--spacing-md);
+  text-align: center;
+  border-top: var(--border-width) solid var(--border);
+  background-color: var(--bg-light);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.game-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.game-footer a:hover {
+  color: var(--secondary);
+  text-shadow: 0 0 5px var(--secondary);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+@media (max-width: 900px) {
+  .game-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-sidebar {
+    width: 300px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .next-piece-box,
+  .controls-box,
+  .status-box,
+  .stats-box {
+    flex: 1;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    height: 100vh;
+  }
+
+  .game-header h1 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  .header-info {
+    gap: var(--spacing-md);
+  }
+
+  .score-display .value, .level-display .value {
+    font-size: 1.5rem;
+  }
+
+  #gameCanvas {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .game-container {
+    padding: var(--spacing-md);
+  }
+
+  .game-sidebar {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .controls-list {
+    font-size: 0.75rem;
+  }
+}
+
+/* ===========================
+   ACCESSIBILITY
+   =========================== */
+button:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===========================
+   PRINT STYLES
+   =========================== */
+@media print {
+  body {
+    display: none;
+  }
+}
